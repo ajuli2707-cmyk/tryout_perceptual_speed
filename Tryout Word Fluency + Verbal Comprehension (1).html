@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tryout Word Fluency dan Verbal Comprehension</title>
+<style>
+:root{--bg:#f6f4fa;--card:#fff;--ink:#241c33;--mut:#6a617a;--line:#e0d9ec;--pri:#7b1fa2;--pri2:#5e1580;--on:#fff;--ok:#2e7d32;--okb:#e6f4e7;--bad:#c62828;--badb:#fdeaea;--tile:#f0e6f7;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#17111f;--card:#211a2e;--ink:#eee8f6;--mut:#aca2bd;--line:#3a2f4d;--pri:#ba68c8;--pri2:#d391de;--on:#1d0f26;--ok:#81c784;--okb:#173321;--bad:#ef9a9a;--badb:#3a1c1c;--tile:#2e2340;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#17111f;--card:#211a2e;--ink:#eee8f6;--mut:#aca2bd;--line:#3a2f4d;--pri:#ba68c8;--pri2:#d391de;--on:#1d0f26;--ok:#81c784;--okb:#173321;--bad:#ef9a9a;--badb:#3a1c1c;--tile:#2e2340;color-scheme:dark}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+#app{max-width:780px;margin:0 auto;padding:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:14px}
+h1{font-size:1.6rem;margin:.2em 0}h2{font-size:1.2rem;margin:.2em 0 .5em}
+.mut{color:var(--mut)}.sm{font-size:.88rem}
+.hero{background:linear-gradient(135deg,#6a1b9a,#ef6c00);color:#fff;border:0}.hero .mut{color:#f6e8ff}
+.btn{font:inherit;font-weight:700;border:0;border-radius:12px;padding:12px 18px;background:var(--pri);color:var(--on);cursor:pointer}
+.btn:hover{background:var(--pri2)}.btn.alt{background:transparent;color:var(--ink);border:1px solid var(--line)}.btn:disabled{opacity:.45;cursor:default}
+.modes{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.mode{text-align:left;font:inherit;color:var(--ink);background:var(--card);border:2px solid var(--line);border-radius:14px;padding:14px;cursor:pointer}.mode:hover{border-color:var(--pri)}.mode b{display:block;font-size:1.05rem}
+.top{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.badge{display:inline-block;border-radius:99px;padding:3px 12px;font-size:.8rem;font-weight:700;background:var(--tile);color:var(--pri2)}
+.timer{font-variant-numeric:tabular-nums;font-weight:800;font-size:1.25rem}.timer.low{color:var(--bad)}
+.bar{height:8px;border-radius:9px;background:var(--line);overflow:hidden;margin:10px 0 14px}.bar i{display:block;height:100%;background:var(--pri);transition:width .2s}
+.q{margin:0 0 12px;font-size:1.08rem}.q.sm2{font-size:.95rem;color:var(--mut)}
+.tiles{display:flex;gap:8px;justify-content:center;margin:8px 0 16px;flex-wrap:wrap}
+.tiles span{min-width:44px;padding:8px;text-align:center;border-radius:10px;background:var(--tile);font-weight:800;font-size:1.7rem}
+.tiles span.b{background:transparent;border-bottom:3px solid var(--pri);border-radius:0;color:transparent}
+.opts{display:grid;gap:8px}.opts.g{grid-template-columns:repeat(auto-fit,minmax(120px,1fr))}
+.opt{font:inherit;color:var(--ink);background:var(--card);border:2px solid var(--line);border-radius:14px;padding:11px 14px;cursor:pointer;text-align:left;display:flex;gap:10px;align-items:center}
+.opt i{font-style:normal;font-weight:800;color:var(--pri2);min-width:1.2em}
+.opt:hover:not(:disabled){border-color:var(--pri)}.opt.sel{border-color:var(--pri);background:var(--tile)}
+.opt.ok{border-color:var(--ok);background:var(--okb)}.opt.no{border-color:var(--bad);background:var(--badb)}.opt:disabled{cursor:default}
+.fb{margin-top:12px;padding:10px 12px;border-radius:12px;font-size:.92rem}.fb.ok{background:var(--okb)}.fb.no{background:var(--badb)}
+.nav{display:flex;justify-content:space-between;gap:8px;margin-top:14px}
+.pal{display:grid;grid-template-columns:repeat(10,1fr);gap:5px}
+.pal button{font:inherit;font-size:.72rem;padding:6px 0;border-radius:7px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+.pal .done{background:var(--tile);border-color:var(--pri)}.pal .ok{background:var(--okb);border-color:var(--ok)}.pal .no{background:var(--badb);border-color:var(--bad)}.pal .cur{outline:2px solid var(--pri2)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;text-align:center}.stats b{display:block;font-size:1.6rem}
+table{width:100%;border-collapse:collapse;font-size:.92rem}td,th{padding:7px 6px;border-bottom:1px solid var(--line);text-align:left}
+.rv{border-top:1px solid var(--line);padding:10px 0}.tag{font-weight:700}.tag.ok{color:var(--ok)}.tag.no{color:var(--bad)}
+.tabs{display:flex;gap:8px;margin-bottom:6px;flex-wrap:wrap}
+@media(max-width:520px){.modes{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+(function(){
+var W="ikan burung kerbau kambing harimau singa gajah monyet kancil rusa lebah semut nyamuk belalang cacing udang kepiting cumi bebek angsa merpati elang kelinci tikus ular katak buaya biawak kodok lalat kecoa rayap tawon jangkrik zebra jerapah beruang serigala musang apel jeruk mangga pisang anggur semangka nanas durian jambu salak pepaya tomat wortel bawang cabai kentang bayam kangkung jagung singkong kelapa pinang rambutan manggis kedelai kacang tempe sambal gula kopi roti madu garpu lemari bantal kasur sapu ember gayung piring mangkuk gelas sendok pisau panci wajan kompor setrika cermin gorden karpet tangga pagar gerbang cangkir botol sabun handuk sikat sisir gunting palu kunci sepatu sandal topi kacamata jaket celana sawah ladang pantai danau rawa lembah goa pulau teluk selat tebing udara awan hujan petir badai pelangi bintang matahari langit embun kabut salju gurun kerikil pasir lumpur dokter polisi tentara montir koki murid siswa hakim jaksa bupati menteri presiden gubernur kantor toko warung kedai pabrik gudang bengkel bandara terminal stasiun pelabuhan jembatan menara tugu candi masjid gereja pura museum kampus asrama lapangan stadion kolam panggung layar majalah koran surat mesin motor mobil kereta truk becak cinta benci harap takut sabar syukur bangga malu yakin rindu bahagia damai lelah kuat lemah cepat lambat panjang pendek sempit dalam dangkal berat ringan halus kasar pedas segar hangat dingin panas bersih kotor warna cahaya bayang suara makan minum tidur bangun jalan lari duduk berdiri baca tulis hitung lihat dengar bicara tangis nyanyi tari main kerja ingat lupa kenal cari temu beli jual pakai buang simpan ambil kirim terima tolong pinjam bayar hemat",V="cermat=teliti/ceroboh;rajin=giat/malas;bijak=arif/dungu;jujur=lurus/curang;sopan=santun/kasar;hemat=irit/boros;pandai=pintar/bodoh;kikir=pelit/dermawan;ramai=riuh/sepi;senang=gembira/sedih;berani=gagah/takut;rumit=pelik/mudah;murah=terjangkau/mahal;baru=anyar/lama;kuno=purba/modern;indah=elok/buruk;luas=lapang/sempit;tajam=runcing/tumpul;kuat=perkasa/lemah;miskin=papa/kaya;sombong=angkuh/rendah hati;tenang=damai/gelisah;cemas=khawatir/tenteram;marah=berang/sabar;benar=betul/salah;awal=mula/akhir;pergi=berangkat/datang;kalah=takluk/menang;maju=berkembang/mundur;banyak=melimpah/sedikit;sering=kerap/jarang;hancur=remuk/utuh;cerah=terang/gelap;basah=lembap/kering;dingin=sejuk/panas;bersih=suci/kotor;harum=wangi/busuk;manis=legit/pahit;tinggi=jangkung/rendah;ringan=enteng/berat;halus=lembut/kasar;keras=kukuh/lunak;dekat=karib/jauh;lurus=lempang/bengkok;sehat=bugar/sakit;hidup=bernyawa/mati;ramah=bersahabat/ketus;tulus=ikhlas/pura-pura;rela=sudi/enggan;patuh=taat/membangkang;gesit=lincah/lamban;tangkas=cekatan/canggung;luwes=lentur/kaku;bising=gaduh/hening;rapi=teratur/berantakan;longgar=renggang/ketat;jelas=gamblang/samar;sementara=sesaat/permanen;tetap=konstan/berubah;asli=murni/palsu;bebas=merdeka/terikat;aman=selamat/berbahaya;mudah=gampang/sulit;cukup=memadai/kurang;penuh=padat/kosong;valid=sahih/keliru;krusial=genting/sepele;solid=tangguh/rapuh;dinamis=aktif/statis;optimal=maksimal/minimal;mutakhir=terbaru/usang;relevan=berkaitan/tak berkaitan;sunyi=lengang/ramai;gelap=suram/terang;tamu=pengunjung/tuan rumah";
+var L="ABCDE",SEC=[{n:"Word Fluency",t:300},{n:"Verbal Comprehension",t:900}],BL=" kita kata kota data mata rata tata bata buka baku beku bela besi bisa bulu buku dari dara dulu duka kaki kali kini kuku lagi lama lari laku lupa mati nama obat pada paku pita rasa raya rupa saja saku sama sapa saya suka tahu tali tapi tuan tuli tulis ubah ukur usai ",CM={B:"P",P:"B",D:"T",T:"D",G:"K",K:"G",M:"N",N:"M",L:"R",R:"L",C:"J",J:"C"};
+var S={pk:0,mode:"",sec:0,qs:[[],[]],ans:[[],[]],i:0,left:0,tm:null,view:"start",f:"all"};
+var $=document.getElementById("app");
+function shuf(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
+function esc(s){return String(s).replace(/[&<>]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;"}[c]})}
+function md(s){return esc(s).replace(/\*\*(.+?)\*\*/g,"<b>$1</b>")}
+function fmt(s){return Math.floor(s/60)+":"+String(s%60).padStart(2,"0")}
+function last(){try{return JSON.parse(localStorage.getItem("wfvc")||"null")}catch(e){return null}}
+function save(o){try{localStorage.setItem("wfvc",JSON.stringify(o))}catch(e){}}
+function mut(w,R,al){var f=[],i;for(i=0;i<w.length;i++)if(R.indexOf(i)<0)f.push(i);var set={},n=0,k=0;
+while(n<4&&k++<400){var c=w.split(""),ch=0;f.forEach(function(i){if(Math.random()<.65){var x=c[i];if("AEIOU".indexOf(x)>=0){var o="AEIOU".replace(x,"");c[i]=o[Math.floor(Math.random()*4)]}else if(CM[x])c[i]=CM[x];if(c[i]!==x)ch=1}});
+var s=c.join("");if(ch&&!set[s]&&al.indexOf(s)<0&&BL.indexOf(" "+s.toLowerCase()+" ")<0){set[s]=1;n++}}
+return n>=4?Object.keys(set):null}
+function build(){var sd=7,r=function(){sd=sd*16807%2147483647;return sd/2147483647},al=W.split(" ").filter(function(w,i,a){return w.length>3&&a.indexOf(w)===i}).map(function(w){return w.toUpperCase()}),i;
+for(i=al.length-1;i>0;i--){var j=Math.floor(r()*(i+1)),t=al[i];al[i]=al[j];al[j]=t}
+var wf=[];al.slice(S.pk*63,S.pk*63+63).forEach(function(w){if(wf.length>=50)return;var n=w.length,R=[0,n-1];if(n>5&&Math.random()<.4)R.push(1+Math.floor(Math.random()*(n-2)));var d=mut(w,R,al);if(!d)return;var o=shuf([w].concat(d));wf.push({w:w,R:R,o:o,a:o.indexOf(w),e:"Kata dasar yang baku adalah “"+w+"”. Opsi lain bukan kata dasar yang terdapat dalam KBBI."})});
+var T=V.split(";").map(function(x){var p=x.split("="),q=p[1].split("/");return[p[0],q[0],q[1]]}),g=Math.floor(T.length/3),k=S.pk,sy=T.slice(k*g,k*g+g),an=T.slice((k+1)%3*g,(k+1)%3*g+g);
+function mq(t,sn){var c=sn?t[1]:t[2],tr=sn?t[2]:t[1],p=shuf(T.filter(function(u){return u[0]!==t[0]}).map(function(u){return sn?u[1]:u[2]})).filter(function(x,i,a){return a.indexOf(x)===i&&x!==c&&x!==tr}),o=shuf([c,tr].concat(p.slice(0,3)));
+return{s:"Pilih "+(sn?"padanan kata (sinonim)":"lawan kata (antonim)")+" dari kata **"+t[0]+"**.",o:o,a:o.indexOf(c),e:"Kata “"+t[0]+"” bersinonim dengan “"+t[1]+"” dan berantonim dengan “"+t[2]+"”. Soal ini meminta "+(sn?"sinonim":"antonim")+", sehingga jawabannya “"+c+"”."}}
+S.qs=[wf,shuf(sy.map(function(t){return mq(t,1)}).concat(an.map(function(t){return mq(t,0)})))]}
+function start(){S.view="start";var h=last();
+$.innerHTML='<div class="card hero"><h1>Tryout Word Fluency + Verbal Comprehension</h1><p class="mut">3 paket soal baru. Tiap paket: 50 soal Word Fluency (5 menit) lalu 50 soal Verbal Comprehension (15 menit).</p></div>'+
+'<div class="card"><h2>Pilih paket soal</h2><div class="tabs">'+[0,1,2].map(function(k){return'<button class="btn '+(S.pk===k?"":"alt")+'" data-a="pk" data-k="'+k+'">Paket '+(k+1)+'</button>'}).join("")+'</div><p class="sm mut">Setiap paket berisi soal berbeda: 50 Word Fluency dan 50 Verbal Comprehension (sinonim dan antonim).</p></div><div class="card"><h2>Pilih mode</h2><div class="modes"><button class="mode" data-a="go" data-m="latihan"><b>Mode Latihan</b><span class="mut sm">Tanpa batas waktu. Jawaban langsung dinilai dan dijelaskan.</span></button><button class="mode" data-a="go" data-m="tryout"><b>Mode Tryout</b><span class="mut sm">Timer per bagian. Setelah pindah ke bagian 2, bagian 1 tidak bisa dibuka lagi.</span></button></div></div>'+
+'<div class="card"><h2>Susunan tes</h2><table><tr><th>Bagian</th><th>Soal</th><th>Waktu</th><th>Tugas</th></tr><tr><td>1. Word Fluency</td><td>50</td><td>5 menit</td><td>Pilih kata dasar KBBI sesuai huruf awal, huruf akhir, dan jumlah huruf</td></tr><tr><td>2. Verbal Comprehension</td><td>50</td><td>15 menit</td><td>Pilih sinonim atau antonim dari kata yang ditebalkan</td></tr></table><p class="sm mut">Tombol keyboard: A–E atau 1–5 untuk memilih, panah kiri/kanan untuk pindah soal.'+(h?" Hasil terakhir: "+h.t+" benar ("+h.m+").":"")+'</p></div>'}
+function go(m){S.mode=m;build();S.ans=[[],[]];S.sec=0;begin()}
+function begin(){S.i=0;S.view="quiz";clearInterval(S.tm);
+if(S.mode==="tryout"){S.left=SEC[S.sec].t;S.tm=setInterval(function(){S.left--;var t=document.getElementById("t");if(t){t.textContent=fmt(S.left);t.className="timer"+(S.left<=60?" low":"")}if(S.left<=0)endSec()},1000)}quiz()}
+function quiz(){var s=S.sec,q=S.qs[s][S.i],a=S.ans[s][S.i],lat=S.mode==="latihan",lk=lat&&a!==undefined,n=S.ans[s].filter(function(x){return x!==undefined}).length;
+var ob=q.o.map(function(o,k){var c="opt";if(lk){if(k===q.a)c+=" ok";else if(k===a)c+=" no"}else if(k===a)c+=" sel";return'<button class="'+c+'" data-a="pick" data-k="'+k+'"'+(lk?" disabled":"")+'><i>'+L[k]+'</i><span>'+o+'</span></button>'}).join("");
+var fb=lk?'<div class="fb '+(a===q.a?"ok":"no")+'"><b>'+(a===q.a?"Benar!":"Kurang tepat.")+"</b> "+esc(q.e)+"</div>":"";
+var body=s===0?'<p class="q sm2">Berikut disajikan huruf awal dan akhir sebuah kata dasar yang tercantum dalam KBBI. Pilih satu (1) kata yang paling tepat.</p><div class="tiles">'+q.w.split("").map(function(c,i){return q.R.indexOf(i)>=0?"<span>"+c+"</span>":'<span class="b">M</span>'}).join("")+'</div>':'<p class="q sm2">Perhatikan jenis soal: padanan kata (sinonim) atau lawan kata (antonim).</p><p class="q">'+md(q.s)+'</p>';
+var pal=S.qs[s].map(function(x,j){var u=S.ans[s][j],c=u===undefined?"":lat?(u===x.a?"ok":"no"):"done";if(j===S.i)c+=" cur";return'<button class="'+c+'" data-a="jump" data-j="'+j+'">'+(j+1)+'</button>'}).join("");
+$.innerHTML='<div class="card"><div class="top"><span><b>'+SEC[s].n+" · Soal "+(S.i+1)+" / "+S.qs[s].length+"</b></span>"+(S.mode==="tryout"?'<span class="timer'+(S.left<=60?" low":"")+'" id="t">'+fmt(S.left)+'</span>':'<span class="badge">Mode Latihan</span>')+'</div><div class="bar"><i style="width:'+n*100/S.qs[s].length+'%"></i></div>'+body+'<div class="opts'+(s===0?" g":"")+'">'+ob+'</div>'+fb+
+'<div class="nav"><button class="btn alt" data-a="prev"'+(S.i===0?" disabled":"")+'>← Sebelumnya</button>'+(S.i===S.qs[s].length-1?'<button class="btn" data-a="end">Selesai bagian</button>':'<button class="btn" data-a="next">Selanjutnya →</button>')+'</div></div>'+
+'<div class="card"><div class="top" style="margin-bottom:8px"><span class="sm mut">Dijawab '+n+' dari '+S.qs[s].length+'</span><button class="btn alt" data-a="end">'+(s===0?"Lanjut ke Verbal Comprehension":"Akhiri tes")+'</button></div><div class="pal">'+pal+'</div></div>'}
+function endSec(){clearInterval(S.tm);if(S.sec===0){S.view="mid";var n=S.ans[0].filter(function(x){return x!==undefined}).length;
+$.innerHTML='<div class="card hero"><h1>Bagian 1 selesai</h1><p class="mut">Word Fluency: '+n+' dari '+S.qs[0].length+' soal terjawab.</p></div><div class="card"><h2>Berikutnya: Verbal Comprehension</h2><p>50 soal, waktu '+(S.mode==="tryout"?"15 menit. Timer mulai saat Anda menekan tombol di bawah.":"tidak dibatasi.")+' Bagian 1 tidak dapat dibuka lagi.</p><button class="btn" data-a="b2">Mulai bagian 2</button></div>'}else finish()}
+function stat(s){var c=0,a=0;S.qs[s].forEach(function(q,i){var u=S.ans[s][i];if(u!==undefined){a++;if(u===q.a)c++}});return{c:c,a:a}}
+function finish(){clearInterval(S.tm);S.view="res";S.f="all";var r=[stat(0),stat(1)];S.r=r;save({t:r[0].c+r[1].c,m:"Paket "+(S.pk+1)+(S.mode==="tryout"?" Tryout":" Latihan")});result()}
+function result(){var r=S.r,c=r[0].c+r[1].c,a=r[0].a+r[1].a,acc=a?Math.round(c/a*100):0;
+var rows=r.map(function(x,i){return"<tr><td>"+SEC[i].n+"</td><td>"+x.c+" / "+S.qs[i].length+"</td><td>"+x.a+" dijawab</td><td>"+(x.a?Math.round(x.c/x.a*100):0)+"%</td></tr>"}).join("");
+var rv="";for(var s=0;s<2;s++)S.qs[s].forEach(function(q,i){var u=S.ans[s][i],ok=u===q.a,bl=u===undefined;if(S.f==="wrong"&&(ok||bl))return;if(S.f==="blank"&&!bl)return;
+rv+='<div class="rv"><b>'+(s?"VC":"WF")+" "+(i+1)+'.</b> <span class="tag '+(ok?"ok":"no")+'">'+(ok?"Benar":bl?"Kosong":"Salah")+'</span><div>'+(s?md(q.s):'<b>'+q.w.split("").map(function(c,i){return q.R.indexOf(i)>=0?c:"_"}).join(" ")+'</b>')+'</div><div class="sm mut">Pilihan Anda: '+(bl?"-":esc(q.o[u]))+" · Kunci: "+esc(q.o[q.a])+'</div><div class="sm">'+esc(q.e)+'</div></div>'});
+function tb(k,t){return'<button class="btn '+(S.f===k?"":"alt")+'" data-a="flt" data-f="'+k+'">'+t+"</button>"}
+$.innerHTML='<div class="card hero"><h1>Hasil Tryout</h1><p class="mut">Skor '+c+" dari "+(S.qs[0].length+S.qs[1].length)+" · akurasi "+acc+"% dari soal yang dijawab</p></div>"+
+'<div class="card stats"><div><b>'+c+'</b><span class="mut sm">Benar</span></div><div><b>'+(a-c)+'</b><span class="mut sm">Salah</span></div><div><b>'+(S.qs[0].length+S.qs[1].length-a)+'</b><span class="mut sm">Kosong</span></div><div><b>'+acc+'%</b><span class="mut sm">Akurasi</span></div></div>'+
+'<div class="card"><h2>Per bagian</h2><table>'+rows+'</table></div><div class="card"><h2>Pembahasan</h2><div class="tabs">'+tb("all","Semua")+tb("wrong","Salah")+tb("blank","Kosong")+'</div>'+(rv||'<p class="mut">Tidak ada soal pada kategori ini.</p>')+'</div>'+
+'<div class="card top"><button class="btn" data-a="go" data-m="'+S.mode+'">Ulangi</button><button class="btn alt" data-a="home">Menu utama</button></div>'}
+function mv(d){S.i=Math.max(0,Math.min(S.qs[S.sec].length-1,S.i+d));quiz()}
+function pick(k){var s=S.sec;if(S.mode==="latihan"&&S.ans[s][S.i]!==undefined)return;S.ans[s][S.i]=k;quiz()}
+$.addEventListener("click",function(e){var b=e.target.closest("[data-a]");if(!b||b.disabled)return;var a=b.dataset.a;
+if(a==="go")go(b.dataset.m);else if(a==="pick")pick(+b.dataset.k);else if(a==="next")mv(1);else if(a==="prev")mv(-1);else if(a==="jump"){S.i=+b.dataset.j;quiz()}
+else if(a==="end"){var n=S.qs[S.sec].length-S.ans[S.sec].filter(function(x){return x!==undefined}).length;if(!n||confirm("Masih ada "+n+" soal kosong. Lanjut?"))endSec()}
+else if(a==="b2"){S.sec=1;begin()}else if(a==="flt"){S.f=b.dataset.f;result()}else if(a==="pk"){S.pk=+b.dataset.k;start()}else if(a==="home")start()});
+document.addEventListener("keydown",function(e){if(S.view!=="quiz")return;var k="abcde".indexOf(e.key.toLowerCase());if(k<0&&/^[1-5]$/.test(e.key))k=+e.key-1;
+if(k>=0&&e.key.length===1)pick(k);else if(e.key==="ArrowRight")mv(1);else if(e.key==="ArrowLeft")mv(-1)});
+start();
+})();
+</script>
+</body>
+</html>
