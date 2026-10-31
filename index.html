@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tryout Perceptual Speed – 100 Soal</title>
+<style>
+:root{--bg:#f3f7f7;--card:#fff;--ink:#16302f;--mut:#5b7170;--line:#d5e2e1;--pri:#00897b;--pri2:#00695c;--on:#fff;--ok:#2e7d32;--okb:#e6f4e7;--bad:#c62828;--badb:#fdeaea;--tile:#e0f2f1;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1b1b;--card:#172827;--ink:#e6f1f0;--mut:#9bb4b2;--line:#2b4241;--pri:#26a69a;--pri2:#4db6ac;--on:#06201d;--ok:#81c784;--okb:#173321;--bad:#ef9a9a;--badb:#3a1c1c;--tile:#203836;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0f1b1b;--card:#172827;--ink:#e6f1f0;--mut:#9bb4b2;--line:#2b4241;--pri:#26a69a;--pri2:#4db6ac;--on:#06201d;--ok:#81c784;--okb:#173321;--bad:#ef9a9a;--badb:#3a1c1c;--tile:#203836;color-scheme:dark}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+#app{max-width:780px;margin:0 auto;padding:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:14px}
+h1{font-size:1.6rem;margin:.2em 0}h2{font-size:1.2rem;margin:.2em 0 .5em}
+.mut{color:var(--mut)}.sm{font-size:.88rem}
+.hero{background:linear-gradient(135deg,#00695c,#26a69a);color:#fff;border:0}
+.hero .mut{color:#d8f3ef}
+.btn{font:inherit;font-weight:700;border:0;border-radius:12px;padding:12px 18px;background:var(--pri);color:var(--on);cursor:pointer}
+.btn:hover{background:var(--pri2)}.btn.alt{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.btn:disabled{opacity:.45;cursor:default}
+.modes{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.mode{text-align:left;font:inherit;color:var(--ink);background:var(--card);border:2px solid var(--line);border-radius:14px;padding:14px;cursor:pointer}
+.mode:hover{border-color:var(--pri)}.mode b{display:block;font-size:1.05rem}
+.top{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.badge{display:inline-block;border-radius:99px;padding:3px 12px;font-size:.8rem;font-weight:700;background:var(--tile);color:var(--pri2)}
+.timer{font-variant-numeric:tabular-nums;font-weight:800;font-size:1.25rem}
+.timer.low{color:var(--bad)}
+.bar{height:8px;border-radius:9px;background:var(--line);overflow:hidden;margin:10px 0 14px}.bar i{display:block;height:100%;background:var(--pri);transition:width .2s}
+.q{font-size:.95rem;color:var(--mut);margin:0 0 10px}
+.row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:6px 0 16px}
+.row span{min-width:44px;padding:8px 6px;text-align:center;border-radius:10px;background:var(--tile);font-weight:800;font-size:1.7rem;letter-spacing:.04em}
+.opts{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.opt{font:inherit;color:var(--ink);background:var(--card);border:2px solid var(--line);border-radius:14px;padding:10px 0;cursor:pointer;text-align:center}
+.opt small{display:block;color:var(--mut);font-size:.72rem;font-weight:700}.opt b{font-size:1.6rem}
+.opt:hover:not(:disabled){border-color:var(--pri)}.opt.sel{border-color:var(--pri);background:var(--tile)}
+.opt.ok{border-color:var(--ok);background:var(--okb)}.opt.no{border-color:var(--bad);background:var(--badb)}
+.opt:disabled{cursor:default}
+.fb{margin-top:12px;padding:10px 12px;border-radius:12px;font-size:.92rem}.fb.ok{background:var(--okb)}.fb.no{background:var(--badb)}
+.nav{display:flex;justify-content:space-between;gap:8px;margin-top:14px}
+.pal{display:grid;grid-template-columns:repeat(10,1fr);gap:5px}
+.pal button{font:inherit;font-size:.72rem;padding:6px 0;border-radius:7px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+.pal .done{background:var(--tile);border-color:var(--pri)}.pal .ok{background:var(--okb);border-color:var(--ok)}.pal .no{background:var(--badb);border-color:var(--bad)}.pal .cur{outline:2px solid var(--pri2)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;text-align:center}.stats b{display:block;font-size:1.6rem}
+table{width:100%;border-collapse:collapse;font-size:.92rem}td,th{padding:7px 6px;border-bottom:1px solid var(--line);text-align:left}
+.rv{border-top:1px solid var(--line);padding:10px 0}.rv .row{justify-content:flex-start;margin:4px 0}.rv .row span{font-size:1.1rem;min-width:30px;padding:4px}
+.tag{font-weight:700}.tag.ok{color:var(--ok)}.tag.no{color:var(--bad)}
+.tabs{display:flex;gap:8px;margin-bottom:6px;flex-wrap:wrap}
+@media(max-width:520px){.modes{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.row span{min-width:34px;font-size:1.35rem}.pal{grid-template-columns:repeat(10,1fr)}}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+(function(){
+var L="ABCDE",AZ="ABCDEFGHIJKLMNOPQRSTUVWXYZ",TOTAL=100,SECS=450;
+var G=["OQCGD","BRPD","EFPB","ILJT","MNHW","UVYJ","KXYR","ZSXN","AHVR","WVU","TFIY"],NEI={};
+AZ.split("").forEach(function(c){NEI[c]=new Set()});
+G.forEach(function(g){for(var i=0;i<g.length;i++)for(var j=0;j<g.length;j++)if(i!==j)NEI[g[i]].add(g[j])});
+var CONF="OQCGDBRPEFILJTMNHWUVYK";
+var LV=[{n:[5],pool:AZ,nl:null,pc:0,name:"Mudah"},{n:[5,6],pool:AZ,nl:2,pc:0,name:"Mudah–Sedang"},{n:[6,7],pool:AZ,nl:3,pc:0,name:"Sedang"},{n:[8],pool:CONF,nl:4,pc:0,name:"Sulit"},{n:[10],pool:CONF,nl:4,pc:1,name:"Sangat sulit"}];
+function mk(s){return function(){s|=0;s=s+0x6D2B79F5|0;var t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function shuf(r,a){for(var i=a.length-1;i>0;i--){var j=Math.floor(r()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
+function gen(r,lv,seen){var P=LV[lv];
+for(var t=0;t<999;t++){
+var n=P.n[Math.floor(r()*P.n.length)],row=shuf(r,P.pool.split("")).slice(0,n),k=row.join("");if(seen.has(k))continue;
+var pos=Math.floor(r()*n),cor=row[pos],nl=P.nl===null?(r()<.4?1:0):P.nl;
+var pref=P.pc?Array.from(NEI[cor]).filter(function(c){return row.indexOf(c)<0}):[];
+var pn=new Set();row.forEach(function(x){NEI[x].forEach(function(c){if(row.indexOf(c)<0)pn.add(c)})});
+pn=shuf(r,Array.from(pn));pref=shuf(r,pref);
+var look=[],cand=pref.concat(pn);
+for(var i=0;i<cand.length&&look.length<nl;i++)if(look.indexOf(cand[i])<0)look.push(cand[i]);
+if(look.length<nl)continue;
+var base=(lv>=3?P.pool:AZ).split("");
+var oth=base.filter(function(c){return row.indexOf(c)<0&&look.indexOf(c)<0});
+if(oth.length<4-look.length)oth=AZ.split("").filter(function(c){return row.indexOf(c)<0&&look.indexOf(c)<0});
+shuf(r,oth);var dis=look.concat(oth.slice(0,4-look.length));if(dis.length!==4)continue;
+var opts=shuf(r,[cor].concat(dis)),ans=opts.indexOf(cor);seen.add(k);
+var sim=[];dis.forEach(function(d){for(var q=0;q<row.length;q++)if(NEI[row[q]].has(d)){sim.push(d+" mirip dengan "+row[q]);break}});
+var no=opts.map(function(o,i){return i===ans?null:L[i]+" ("+o+")"}).filter(Boolean).join(", ");
+return{row:row,opts:opts,ans:ans,lv:lv,exp:"Huruf "+cor+" adalah huruf ke-"+(pos+1)+" dari "+n+" huruf pada deret. Opsi "+no+" tidak ada pada deret."+(sim.length&&lv>0?" Waspadai pengecoh yang mirip bentuk: "+sim.slice(0,3).join("; ")+".":"")}}
+throw new Error("gen")}
+function build(seed){var r=mk(seed),seen=new Set(),out=[];for(var l=0;l<5;l++)for(var i=0;i<20;i++)out.push(gen(r,l,seen));return out}
+
+var S={seed:2026,qs:null,mode:null,ans:[],i:0,left:SECS,tm:null,view:"start",filter:"all"};
+var $=document.getElementById("app");
+function esc(s){return String(s).replace(/[&<>]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;"}[c]})}
+function fmt(s){return Math.floor(s/60)+":"+String(s%60).padStart(2,"0")}
+function last(){try{return JSON.parse(localStorage.getItem("ps100")||"null")}catch(e){return null}}
+function save(o){try{localStorage.setItem("ps100",JSON.stringify(o))}catch(e){}}
+
+function start(){S.view="start";var h=last();
+$.innerHTML='<div class="card hero"><h1>Tryout Perceptual Speed</h1><p class="mut">100 soal bertingkat, dari Mudah sampai Sangat sulit. Pilih satu (1) huruf yang tertera pada deret. Format mengikuti simulasi asesmen.</p></div>'+
+'<div class="card"><h2>Pilih mode belajar</h2><div class="modes"><button class="mode" data-a="go" data-m="latihan"><b>Mode Latihan</b><span class="mut sm">Tanpa batas waktu. Jawaban langsung dinilai dan dijelaskan.</span></button><button class="mode" data-a="go" data-m="tryout"><b>Mode Tryout</b><span class="mut sm">Timer 7 menit 30 detik (4,5 detik per soal). Hasil dan pembahasan di akhir.</span></button></div></div>'+
+'<div class="card"><h2>Tingkat kesulitan</h2><table><tr><th>Soal</th><th>Tingkat</th><th>Karakter</th></tr><tr><td>1–20</td><td>Mudah</td><td>5 huruf, pengecoh acak</td></tr><tr><td>21–40</td><td>Mudah–Sedang</td><td>5–6 huruf, 2 pengecoh mirip bentuk</td></tr><tr><td>41–60</td><td>Sedang</td><td>6–7 huruf, 3 pengecoh mirip</td></tr><tr><td>61–80</td><td>Sulit</td><td>8 huruf saling mirip</td></tr><tr><td>81–100</td><td>Sangat sulit</td><td>10 huruf, pengecoh meniru jawaban</td></tr></table><p class="sm mut">Tips: lihat deret sebagai satu kelompok, cocokkan ke opsi, pilih, lanjut. Tombol keyboard: A–E atau 1–5 untuk memilih, panah kiri/kanan untuk pindah soal.</p></div>'+
+'<div class="card top"><span class="sm mut">Paket soal nomor <b>'+S.seed+'</b>'+(h?" · hasil terakhir: "+h.c+" benar dari "+h.a+" dijawab ("+h.m+")":"")+'</span><button class="btn alt" data-a="new">Acak soal baru</button></div>'}
+
+function go(m){S.mode=m;S.qs=build(S.seed);S.ans=new Array(TOTAL).fill(-1);S.i=0;S.left=SECS;S.view="quiz";clearInterval(S.tm);
+if(m==="tryout")S.tm=setInterval(function(){S.left--;var t=document.getElementById("t");if(t){t.textContent=fmt(S.left);t.className="timer"+(S.left<=60?" low":"")}if(S.left<=0)finish()},1000);quiz()}
+
+function quiz(){var q=S.qs[S.i],a=S.ans[S.i],lat=S.mode==="latihan",locked=lat&&a>=0;
+var ob=q.opts.map(function(o,k){var c="opt";if(locked){if(k===q.ans)c+=" ok";else if(k===a)c+=" no"}else if(k===a)c+=" sel";
+return'<button class="'+c+'" data-a="pick" data-k="'+k+'"'+(locked?" disabled":"")+'><small>'+L[k]+'</small><b>'+o+'</b></button>'}).join("");
+var fb=locked?'<div class="fb '+(a===q.ans?"ok":"no")+'"><b>'+(a===q.ans?"Benar!":"Kurang tepat.")+"</b> "+esc(q.exp)+"</div>":"";
+var pal=S.qs.map(function(x,j){var c=S.ans[j]<0?"":lat?(S.ans[j]===x.ans?"ok":"no"):"done";if(j===S.i)c+=" cur";return'<button class="'+c+'" data-a="jump" data-j="'+j+'">'+(j+1)+'</button>'}).join("");
+var n=S.ans.filter(function(x){return x>=0}).length;
+$.innerHTML='<div class="card"><div class="top"><span><b>Soal '+(S.i+1)+" / "+TOTAL+'</b> <span class="badge">'+LV[q.lv].name+'</span></span>'+(S.mode==="tryout"?'<span class="timer'+(S.left<=60?" low":"")+'" id="t">'+fmt(S.left)+'</span>':'<span class="mut sm">Mode Latihan</span>')+'</div><div class="bar"><i style="width:'+(n/TOTAL*100)+'%"></i></div>'+
+'<p class="q">Berikut disajikan sederet huruf. Pilih satu (1) huruf yang tertera di bawah!</p><div class="row">'+q.row.map(function(c){return"<span>"+c+"</span>"}).join("")+'</div><div class="opts">'+ob+'</div>'+fb+
+'<div class="nav"><button class="btn alt" data-a="prev"'+(S.i===0?" disabled":"")+'>← Sebelumnya</button>'+(S.i===TOTAL-1?'<button class="btn" data-a="fin">Selesai</button>':'<button class="btn" data-a="next">Selanjutnya →</button>')+'</div></div>'+
+'<div class="card"><div class="top" style="margin-bottom:8px"><span class="sm mut">Dijawab '+n+" dari "+TOTAL+'</span><button class="btn alt" data-a="fin">Akhiri tes</button></div><div class="pal">'+pal+'</div></div>'}
+
+function finish(){clearInterval(S.tm);S.view="res";var c=0,a=0,per=[0,0,0,0,0],pa=[0,0,0,0,0];
+S.qs.forEach(function(q,i){if(S.ans[i]>=0){a++;pa[q.lv]++;if(S.ans[i]===q.ans){c++;per[q.lv]++}}});
+S.res={c:c,a:a,per:per,pa:pa};save({c:c,a:a,m:S.mode==="tryout"?"Tryout":"Latihan"});S.filter="all";result()}
+
+function result(){var r=S.res,acc=r.a?Math.round(r.c/r.a*100):0,sc=Math.round(r.c/TOTAL*100);
+var rows=LV.map(function(l,i){return"<tr><td>"+l.name+"</td><td>"+r.per[i]+" / 20</td><td>"+r.pa[i]+" dijawab</td></tr>"}).join("");
+var list=S.qs.map(function(q,i){return{q:q,i:i,u:S.ans[i]}}).filter(function(x){return S.filter==="all"||(S.filter==="wrong"&&x.u>=0&&x.u!==x.q.ans)||(S.filter==="blank"&&x.u<0)});
+var rv=list.map(function(x){var ok=x.u===x.q.ans,bl=x.u<0;return'<div class="rv"><b>'+(x.i+1)+'.</b> <span class="tag '+(ok?"ok":"no")+'">'+(ok?"Benar":bl?"Kosong":"Salah")+'</span> <span class="mut sm">Pilihan Anda: '+(bl?"-":L[x.u]+" ("+x.q.opts[x.u]+")")+" · Kunci: "+L[x.q.ans]+" ("+x.q.opts[x.q.ans]+')</span><div class="row">'+x.q.row.map(function(c){return"<span>"+c+"</span>"}).join("")+'</div><div class="sm">'+esc(x.q.exp)+"</div></div>"}).join("")||'<p class="mut">Tidak ada soal pada kategori ini.</p>';
+function tb(k,t){return'<button class="btn '+(S.filter===k?"":"alt")+'" data-a="flt" data-f="'+k+'">'+t+"</button>"}
+$.innerHTML='<div class="card hero"><h1>Hasil '+(S.mode==="tryout"?"Tryout":"Latihan")+'</h1><p class="mut">Skor '+sc+" dari 100 · akurasi "+acc+"% dari soal yang dijawab"+(S.mode==="tryout"?" · sisa waktu "+fmt(Math.max(S.left,0)):"")+'</p></div>'+
+'<div class="card stats"><div><b>'+r.c+'</b><span class="mut sm">Benar</span></div><div><b>'+(r.a-r.c)+'</b><span class="mut sm">Salah</span></div><div><b>'+(TOTAL-r.a)+'</b><span class="mut sm">Kosong</span></div><div><b>'+acc+'%</b><span class="mut sm">Akurasi</span></div></div>'+
+'<div class="card"><h2>Per tingkat</h2><table>'+rows+'</table></div><div class="card"><h2>Pembahasan</h2><div class="tabs">'+tb("all","Semua")+tb("wrong","Salah")+tb("blank","Kosong")+'</div>'+rv+'</div>'+
+'<div class="card top"><button class="btn" data-a="go" data-m="'+S.mode+'">Ulangi</button><button class="btn alt" data-a="home">Menu utama</button></div>'}
+
+$.addEventListener("click",function(e){var b=e.target.closest("[data-a]");if(!b||b.disabled)return;var a=b.dataset.a;
+if(a==="go")go(b.dataset.m);else if(a==="new"){S.seed=Math.floor(Math.random()*90000)+10000;start()}
+else if(a==="pick"){if(S.mode==="latihan"&&S.ans[S.i]>=0)return;S.ans[S.i]=+b.dataset.k;quiz()}
+else if(a==="next"){S.i=Math.min(S.i+1,TOTAL-1);quiz()}else if(a==="prev"){S.i=Math.max(S.i-1,0);quiz()}
+else if(a==="jump"){S.i=+b.dataset.j;quiz()}
+else if(a==="fin"){var n=S.ans.filter(function(x){return x<0}).length;if(!n||confirm("Masih ada "+n+" soal kosong. Akhiri sekarang?"))finish()}
+else if(a==="flt"){S.filter=b.dataset.f;result()}else if(a==="home"){start()}});
+document.addEventListener("keydown",function(e){if(S.view!=="quiz")return;var k="abcde".indexOf(e.key.toLowerCase());if(k<0&&/^[1-5]$/.test(e.key))k=+e.key-1;
+if(k>=0&&e.key.length===1){if(S.mode==="latihan"&&S.ans[S.i]>=0)return;S.ans[S.i]=k;quiz()}
+else if(e.key==="ArrowRight"){S.i=Math.min(S.i+1,TOTAL-1);quiz()}else if(e.key==="ArrowLeft"){S.i=Math.max(S.i-1,0);quiz()}});
+start();
+})();
+</script>
+</body>
+</html>
